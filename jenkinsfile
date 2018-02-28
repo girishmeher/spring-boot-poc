@@ -4,13 +4,17 @@ pipeline {
 	stage('Check config') {
             steps {
                 echo 'mvn clean'
-		bat 'mvn clean' 
+		withMaven(maven : 'maven_3_5_2'){
+				   bat 'mvn clean'
+		} 
             }
         }
         stage('Compile') {
             steps {
                 echo 'start building ...' 
-		bat 'mvn install'
+		withMaven(maven : 'maven_3_5_2'){
+				   bat 'mvn clean install'
+		}
             }
         }
     }
